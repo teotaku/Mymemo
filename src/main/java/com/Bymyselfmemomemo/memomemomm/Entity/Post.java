@@ -16,7 +16,6 @@ public class Post {
     // private 생성자로 외부에서 직접 객체 생성을 막음
     protected Post() {}
 
-    private PostDTO postDTO;
 
     public Post(PostDTO postDTO) {
         this.content = postDTO.getContent();
@@ -49,10 +48,13 @@ public class Post {
     }
 
     // 정적 팩토리 메서드 추가
-    @Builder
-    public static Post createFromDTO(String title,String content,UserEntity userEntity) {
-        return new Post(title, content, userEntity);
-    }
+    public static Post createFromDTO(PostDTO postDTO,UserEntity userEntity) {
+        return Post.builder()
+                .title(postDTO.getTitle())
+                .content(postDTO.getContent())
+                .userEntity(userEntity)
+                .build();
+     }
 }
 
 

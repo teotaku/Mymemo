@@ -1,10 +1,16 @@
 package com.Bymyselfmemomemo.memomemomm.Entity;
 
 
+import com.Bymyselfmemomemo.memomemomm.dto.JoinDTO;
 import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Getter;
+import org.apache.catalina.User;
 
 import java.time.LocalDateTime;
 
+@Builder
+@Getter
 @Entity
 public class UserEntity {
     @Id
@@ -20,11 +26,21 @@ public class UserEntity {
     @Column
     private String role;
 
-    @Column
-    private LocalDateTime createdAt = LocalDateTime.now();
+
+    private LocalDateTime createdAt ;
 
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
+    }
+
+
+
+    public static UserEntity createFromDTO(JoinDTO joinDTO,String encodePassword) {
+        return UserEntity.builder()
+                .userEmail(joinDTO.getUsername())
+                .password(encodePassword)
+                .role("ROLE_ADMIN")
+                .build();
     }
 }

@@ -28,16 +28,9 @@ public class PostService {
 
     }
 
-    public void CreatePost(PostDTO postDto, String userEmail) {
 
-
-    }
 
     public void createPost(PostDTO postDTO) {
-
-
-
-        Post post = Post.createFromDTO(postDTO.getTitle(),postDTO.getContent());
 
 
 
@@ -45,9 +38,11 @@ public class PostService {
     }
 
     public PostDTO selectPost(Long id) {
-        Post post = postRepository.findById(id);
-        PostDTO postDTO = PostDTO.fromEntity(post);
-        return postDTO;
+       Post post = postRepository.findById(id).orElseThrow
+               (()->new RuntimeException("찾을 수 없습니다."));
+
+        return PostDTO.fromEntity(post);
+
     }
 
     public void deletePost(Long id) {
