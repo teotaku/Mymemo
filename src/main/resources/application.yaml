@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/mymemo
+    username: user
+    password: 12341234
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+    jwt:
+      secret: mySecretKey # JWT ?? ?
+      expiration: 86400000 # ?? ???? (1?)
